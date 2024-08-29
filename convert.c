@@ -4,7 +4,22 @@
 
 int main(){
     display_intro();
-    display_main_menu();
-    char choice = get_choice();
-    temperature_main();
+
+    int should_continue = 1;
+    while (should_continue)
+    {
+        display_main_menu();
+        char choice = get_choice();
+        switch (choice)
+        {
+        case 't':
+            should_continue = temperature_main();
+            break;
+        case 'x':
+            should_continue = 0;
+            break;
+        default:
+            break;
+        }
+    }
 }

@@ -1,5 +1,6 @@
 {
   "files.associations": {
-    "convert.h": "c"
+    "convert.h": "c",
+    "temperature.h": "c"
   }
 }
