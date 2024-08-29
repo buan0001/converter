@@ -15,78 +15,45 @@
 int temperature_main(){
     // printf("Choose the unit to convert from: ");
     display_temperature_menu();
-    // Infinite loop
     char choices[2];
-    for (int i = 0; i < 2; i++)
-    {
-        if (i == 0) {
-            printf("Choose the unit to convert from: ");
-        }
-        else {
-            printf("Choose the unit to convert to: ");
-        }
-        int continueCheck = 1;
-        while (continueCheck)
-        choices[i] = get_choice();
-        continueCheck = validate_input(choices[i]);
-        if (continueCheck < 1) {
-            return continueCheck;
-        }
-    }
-
-    if (choices[0] == choices[1]) {
-        printf("You have selected the same unit to convert from and to. Please select different units.\n");
-        temperature_main();
+    if (get_choices(choices, validate_input_temperature) == 0) {
         return 0;
     }
-    // choices[0] = get_choice();
-    // int continueCheck = validate_input(first_choice);
-    // if (continueCheck < 1) {return continueCheck;}
-    // printf("Choose the unit to convert to: ");
-    // char second_choice = get_choice();
-    // continueCheck = validate_input(second_choice);
-    // if (continueCheck < 1) {return continueCheck;}
-    int repeat = 1;
 
-    while (repeat) {
+    // Repeat until break or return is hit
+    while (1) {
         printf("Enter the value you want to convert: ");
         float input = get_value();
   
         if (choices[0] == 'f') {
             if (choices[1] == 'c') {
-                float converted_celsius = fahrenheit_to_celsius(input);
-                print_temp_results(input, converted_celsius, "fahrenheit", "celsius");
+                print_temp_results(input, fahrenheit_to_celsius(input), "fahrenheit", "celsius");
             }
             else if (choices[1] == 'k') {
-                float converted_kelvin = fahrenheit_to_kelvin(input);
-                print_temp_results(input, converted_kelvin, "fahrenheit", "kelvin");
+                print_temp_results(input, fahrenheit_to_kelvin(input), "fahrenheit", "kelvin");
             }
         }
         else if (choices[0] == 'c') {
             if (choices[1] == 'f') {
-                float converted_fahr = celsius_to_fahrenheit(input);
-                print_temp_results(input, converted_fahr, "celsius", "fahrenheit");
+                print_temp_results(input, celsius_to_fahrenheit(input), "celsius", "fahrenheit");
             }
             else if (choices[1] == 'k') {
-                float converted_kelvin = celsius_to_kelvin(input);
-                print_temp_results(input, converted_kelvin, "celsius", "kelvin");
+                print_temp_results(input, celsius_to_kelvin(input), "celsius", "kelvin");
             }
         }
         else if (choices[0] == 'k') {
             if (choices[1] == 'f') {
-                float converted_fahr = kelvin_to_fahrenheit(input);
-                print_temp_results(input, converted_fahr, "kelvin", "fahrenheit");
+                print_temp_results(input, kelvin_to_fahrenheit(input), "kelvin", "fahrenheit");
             }
             else if (choices[1] == 'c') {
-                float converted_celsius = kelvin_to_celsius(input);
-                print_temp_results(input, converted_celsius, "kelvin", "celsius");
+                print_temp_results(input, kelvin_to_celsius(input), "kelvin", "celsius");
             }
         }
         // end of monster if clause
        ask_repeat();
        char shouldRepeat = get_choice();
        if (shouldRepeat == 'n') {
-        repeat = 0;
+        break;
        }
        // returns to the "main menu"
        else if (shouldRepeat == 'r') return 0;
@@ -98,7 +65,7 @@ int temperature_main(){
 
 
 
-int validate_input(char input){
+int validate_input_temperature(char input){
     if (input == 'f' || input == 'c' || input == 'k') {
         return 1;
     }
@@ -106,7 +73,6 @@ int validate_input(char input){
         return 0;
     }
     else {
-        printf("Invalid input. Please try again.\n");
         return -1;
     }
 }
