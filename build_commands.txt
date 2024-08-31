@@ -1,0 +1,13 @@
+gcc -c -o common.o common.c
+gcc -c -o common_ui.o common_ui.c
+gcc -c -o convert.o convert.c
+gcc -c -o convert_ui.o convert_ui.c
+gcc -c -o temperature.o temperature.c
+gcc -c -o temperature_ui.o temperature_ui.c
+gcc -c -o pressure.o pressure.c
+gcc -c -o pressure_ui.o pressure_ui.c
+gcc -c -o volumes.o volumes.c
+gcc -c -o volumes_ui.o volumes_ui.c
+ 
+gcc -o my_program common.o common_ui.o convert.o convert_ui.o temperature.o temperature_ui.o pressure.o pressure_ui.o volumes.o volumes_ui.o
+gcc -o my_program common.o common_ui.o convert.o convert_ui.o temperature.o temperature_ui.o pressure.o pressure_ui.o

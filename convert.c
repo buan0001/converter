@@ -1,8 +1,9 @@
+#include <stdio.h>
 #include "convert.h"
 #include "common.h"
-#include "common_ui.c"
-#include "convert_ui.c"
-#include "temperature.c"
+// #include "common_ui.c"
+// #include "convert_ui.c"
+// #include "temperature.c"
 
 int main(){
     display_intro();
@@ -18,12 +19,14 @@ int main(){
             temperature_main();
             break;
         case 'v':
-            temperature_main();
+            // volume_main();
+            printf("imagine a volume main here");
             break;
         case 'p':
-            temperature_main();
+            pressure_main();
             break;
         case 'x':
+            printf("Bye!!!");
             return 0;
         default:
             printf("\n %c isn't a valid input. Please try again.\n", choice);

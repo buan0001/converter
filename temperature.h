@@ -2,7 +2,7 @@
 #define TEMPERATURE_H
 
 void display_temperature_menu();
-
+int temperature_main();
 float fahrenheit_to_celsius(float fahr);
 float fahrenheit_to_kelvin(float fahr);
 float celsius_to_fahrenheit(float celsius);

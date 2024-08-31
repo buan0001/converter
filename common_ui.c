@@ -67,15 +67,4 @@ void print_results(float org_val, float converted_val, char from[], char to[]) {
     printf("______________________________________\n");
     printf(format, org_val, converted_val);
     printf("______________________________________\n\n");
-    // printf("You have selected to convert from %c to %c.\n", from, to);
 }
-// int handle_repeat(){
-//        ask_repeat();
-//        char shouldRepeat = get_choice();
-//        if (shouldRepeat == 'n') {
-//         break;
-//        }
-//        // returns to the "main menu"
-//        else if (shouldRepeat == 'r') return 0;
-
-// }

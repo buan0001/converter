@@ -1,11 +1,16 @@
-#include "convert.h"
-
+#include <stdio.h>
+#include "pressure.h"
+#include "common.h"
+// #include "temperature_ui.c"
+// #include "common.c"
+// #include "common_ui.c"
 
 int pressure_main(){
     // printf("Choose the unit to convert from: ");
     display_pressure_menu();
     char choices[2];
-    if (get_unit_choices(choices, validate_input_pressure) == 0) {
+    char valid_input[] = {'k', 'b', 'p'};
+    if (get_unit_choices(choices, valid_input) == 0) {
         return 0;
     }
 
@@ -14,28 +19,28 @@ int pressure_main(){
         printf("Enter the value you want to convert: ");
         float input = get_value();
   
-        if (choices[0] == 'f') {
-            if (choices[1] == 'c') {
-                print_temp_results(input, fahrenheit_to_celsius(input), "fahrenheit", "celsius");
+        if (choices[0] == 'k') {
+            if (choices[1] == 'b') {
+                print_results(input, kilopascal_to_bar(input), "kilopascal", "bar");
             }
-            else if (choices[1] == 'k') {
-                print_temp_results(input, fahrenheit_to_kelvin(input), "fahrenheit", "kelvin");
-            }
-        }
-        else if (choices[0] == 'c') {
-            if (choices[1] == 'f') {
-                print_temp_results(input, celsius_to_fahrenheit(input), "celsius", "fahrenheit");
-            }
-            else if (choices[1] == 'k') {
-                print_temp_results(input, celsius_to_kelvin(input), "celsius", "kelvin");
+            else if (choices[1] == 'p') {
+                print_results(input, kilopascal_to_psi(input), "kilopascal", "psi");
             }
         }
-        else if (choices[0] == 'k') {
-            if (choices[1] == 'f') {
-                print_temp_results(input, kelvin_to_fahrenheit(input), "kelvin", "fahrenheit");
+        else if (choices[0] == 'b') {
+            if (choices[1] == 'p') {
+                print_results(input, bar_to_psi(input), "bar", "psi");
             }
-            else if (choices[1] == 'c') {
-                print_temp_results(input, kelvin_to_celsius(input), "kelvin", "celsius");
+            else if (choices[1] == 'k') {
+                print_results(input, bar_to_kilopascal(input), "bar", "kilopascal");
+            }
+        }
+        else if (choices[0] == 'p') {
+            if (choices[1] == 'k') {
+                print_results(input, psi_to_kilopascal(input), "psi", "kilopascal");
+            }
+            else if (choices[1] == 'b') {
+                print_results(input, psi_to_bar(input), "psi", "bar");
             }
         }
         // end of monster if clause
@@ -47,101 +52,31 @@ int pressure_main(){
        // returns to the "main menu"
        else if (shouldRepeat == 'r') return 0;
     }
-    // if 'n' is pressed, call the function again, getting new units
-    temperature_main();
+    // if 'n' is pressed, exit the loop, call the function again, getting new units
+    pressure_main();
     return 0;
 }
 
-
-
-int validate_input_pressure(char input){
-    if (input == 'p' || input == 'b' || input == 's') {
-        return 1;
+float psi_to_kilopascal(float psi){
+    return psi * 0.1450377377;
     }
-    else if (input == 'r') {
-        return 0;
-    }
-    else {
-        return -1;
-    }
+
+float kilopascal_to_psi(float kpa){
+    return kpa * 6.8947572932;
 }
 
-            // case 'm':{
-            //     display_menu();
-            //     break;
-            //     }
-            // case 'x':{
-            //     printf("See you, bye!");
-            //     return;
-            //     }
-                    // switch (choices[0]){
-        //     case 'c':{
-        //         printf("You selected celsius.:");
-        //         float celsius = get_value();
-        //         float converted_fahr = celsius_to_fahrenheit(celsius);
-        //         // FANCY way to adapt decimals to output:
-        //         int celsius_decimals = count_decimal_places(celsius);
-        //         int fahr_decimals = count_decimal_places(converted_fahr);
-        //         char format[50];
-        //         sprintf(format, "%%.%df celsius er tilsvarende %%.%df fahrenheit\n", celsius_decimals, fahr_decimals);
-        //         printf(format, celsius, converted_fahr);
-        //         break;
-        //     }
-        //     case 'f':{
-        //         printf("Du valgte fahrenheit. Indtast nu værdien du vil konvertere: ");
-        //         float fahrenheit = get_value();
-        //         float converted_celsius = fahrenheit_to_celsius(fahrenheit);
-        //         int fahr_decimals = count_decimal_places(fahrenheit);
-        //         int celsius_decimals = count_decimal_places(converted_celsius);
-        //         char format[50];
-        //         sprintf(format, "%%.%df celsius er tilsvarende %%.%df fahrenheit\n", celsius_decimals, fahr_decimals);
-        //         printf(format, fahrenheit, converted_celsius);
-        //         break;}
-        //     case 'k': {
-        //     }
-        // }
-
-int count_decimal_places(float value) {
-    int count = 0;
-    // move the decimal one time to the right as long as the float to int conversion is lossy
-    while (!is_effectively_int(value)) {
-        value *= 10;
-        count++;
-    }
-    return count;
+float bar_to_psi(float bar){
+   return bar * 0.0689475729;
 }
 
-int is_effectively_int(float value) {
-    // checks if the float's 0's change the value of the number or not
-    return (floorf(value) == value);
+float psi_to_bar(float psi){
+   return psi * 14.503773773;
 }
 
-float celsius_to_fahrenheit(float celsius){
-    float fahr = (celsius * 9/5) + 32;
-    return fahr;
+float kilopascal_to_bar(float kpa){
+   return kpa * 100;
 }
 
-float celsius_to_kelvin(float celsius) {
-    float kelvin = celsius + 273.15;
-    return kelvin;
-}
-
-float fahrenheit_to_celsius(float fahr){
-    float celsius = 5.0 / 9.0 * (fahr - 32);
-    return celsius;
-}
-
-float fahrenheit_to_kelvin(float fahr) {
-    float kelvin = 5.0 / 9.0 * (fahr - 32) + 273.15;
-    return kelvin;
-}
-
-float kelvin_to_celsius(float kelvin) {
-    float celsius = kelvin - 273.15;
-    return celsius;
-}
-
-float kelvin_to_fahrenheit(float kelvin) {
-    float fahr = (kelvin - 273.15) * 9/5 + 32;
-    return fahr;
+float bar_to_kilopascal(float psi){
+   return psi * 0.01;
 }

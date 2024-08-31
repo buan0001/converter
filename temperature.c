@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "temperature.h"
-#include "temperature_ui.c"
 #include "common.h"
-#include "common.c"
-#include "common_ui.c"
+// #include "temperature_ui.c"
+// #include "common.c"
+// #include "common_ui.c"
 
 int temperature_main(){
     // printf("Choose the unit to convert from: ");
@@ -21,26 +21,26 @@ int temperature_main(){
   
         if (choices[0] == 'f') {
             if (choices[1] == 'c') {
-                print_temp_results(input, fahrenheit_to_celsius(input), "fahrenheit", "celsius");
+                print_results(input, fahrenheit_to_celsius(input), "fahrenheit", "celsius");
             }
             else if (choices[1] == 'k') {
-                print_temp_results(input, fahrenheit_to_kelvin(input), "fahrenheit", "kelvin");
+                print_results(input, fahrenheit_to_kelvin(input), "fahrenheit", "kelvin");
             }
         }
         else if (choices[0] == 'c') {
             if (choices[1] == 'f') {
-                print_temp_results(input, celsius_to_fahrenheit(input), "celsius", "fahrenheit");
+                print_results(input, celsius_to_fahrenheit(input), "celsius", "fahrenheit");
             }
             else if (choices[1] == 'k') {
-                print_temp_results(input, celsius_to_kelvin(input), "celsius", "kelvin");
+                print_results(input, celsius_to_kelvin(input), "celsius", "kelvin");
             }
         }
         else if (choices[0] == 'k') {
             if (choices[1] == 'f') {
-                print_temp_results(input, kelvin_to_fahrenheit(input), "kelvin", "fahrenheit");
+                print_results(input, kelvin_to_fahrenheit(input), "kelvin", "fahrenheit");
             }
             else if (choices[1] == 'c') {
-                print_temp_results(input, kelvin_to_celsius(input), "kelvin", "celsius");
+                print_results(input, kelvin_to_celsius(input), "kelvin", "celsius");
             }
         }
         // end of monster if clause
