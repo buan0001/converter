@@ -1,22 +1,16 @@
 #include <stdio.h>
 #include "temperature.h"
 #include "temperature_ui.c"
-#include <math.h>
-#include "convert.h"
-// #include "convert_ui.c"
-
-
-// Terminalbaseret enhedskonvertering - skal kunne konvertere imellem celcius og fahrenheit
-// Modtager 3 kommandoer, der definerer hvilken enhedstype vi modtager efterfølgende:
-// fahr (f), celcius (c), exit (e)
-// Forventer efterfølgende et tal, som skal konverteres
-
+#include "common.h"
+#include "common.c"
+#include "common_ui.c"
 
 int temperature_main(){
     // printf("Choose the unit to convert from: ");
     display_temperature_menu();
     char choices[2];
-    if (get_choices(choices, validate_input_temperature) == 0) {
+    char valid_input[] = {'f', 'c', 'k'};
+    if (get_unit_choices(choices, valid_input) == 0) {
         return 0;
     }
 
@@ -58,73 +52,9 @@ int temperature_main(){
        // returns to the "main menu"
        else if (shouldRepeat == 'r') return 0;
     }
-    // if 'n' is pressed, call the function again, getting new units
+    // if 'n' is pressed, exit the loop, call the function again, getting new units
     temperature_main();
     return 0;
-}
-
-
-
-int validate_input_temperature(char input){
-    if (input == 'f' || input == 'c' || input == 'k') {
-        return 1;
-    }
-    else if (input == 'r') {
-        return 0;
-    }
-    else {
-        return -1;
-    }
-}
-
-            // case 'm':{
-            //     display_menu();
-            //     break;
-            //     }
-            // case 'x':{
-            //     printf("See you, bye!");
-            //     return;
-            //     }
-                    // switch (choices[0]){
-        //     case 'c':{
-        //         printf("You selected celsius.:");
-        //         float celsius = get_value();
-        //         float converted_fahr = celsius_to_fahrenheit(celsius);
-        //         // FANCY way to adapt decimals to output:
-        //         int celsius_decimals = count_decimal_places(celsius);
-        //         int fahr_decimals = count_decimal_places(converted_fahr);
-        //         char format[50];
-        //         sprintf(format, "%%.%df celsius er tilsvarende %%.%df fahrenheit\n", celsius_decimals, fahr_decimals);
-        //         printf(format, celsius, converted_fahr);
-        //         break;
-        //     }
-        //     case 'f':{
-        //         printf("Du valgte fahrenheit. Indtast nu værdien du vil konvertere: ");
-        //         float fahrenheit = get_value();
-        //         float converted_celsius = fahrenheit_to_celsius(fahrenheit);
-        //         int fahr_decimals = count_decimal_places(fahrenheit);
-        //         int celsius_decimals = count_decimal_places(converted_celsius);
-        //         char format[50];
-        //         sprintf(format, "%%.%df celsius er tilsvarende %%.%df fahrenheit\n", celsius_decimals, fahr_decimals);
-        //         printf(format, fahrenheit, converted_celsius);
-        //         break;}
-        //     case 'k': {
-        //     }
-        // }
-
-int count_decimal_places(float value) {
-    int count = 0;
-    // move the decimal one time to the right as long as the float to int conversion is lossy
-    while (!is_effectively_int(value)) {
-        value *= 10;
-        count++;
-    }
-    return count;
-}
-
-int is_effectively_int(float value) {
-    // checks if the float's 0's change the value of the number or not
-    return (floorf(value) == value);
 }
 
 float celsius_to_fahrenheit(float celsius){

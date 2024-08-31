@@ -1,6 +1,8 @@
-#include "temperature.c"
 #include "convert.h"
+#include "common.h"
+#include "common_ui.c"
 #include "convert_ui.c"
+#include "temperature.c"
 
 int main(){
     display_intro();
@@ -24,7 +26,7 @@ int main(){
         case 'x':
             return 0;
         default:
-            printf("\n %c isn't valid. Please try again.\n", choice);
+            printf("\n %c isn't a valid input. Please try again.\n", choice);
         }
     }
 }
