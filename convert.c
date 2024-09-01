@@ -20,7 +20,7 @@ int main(){
             break;
         case 'v':
             // volume_main();
-            printf("imagine a volume main here");
+            volume_main();
             break;
         case 'p':
             pressure_main();

@@ -7,9 +7,9 @@
 
 int volume_main(){
     // printf("Choose the unit to convert from: ");
-    display_pressure_menu();
+    display_volume_menu();
     char choices[2];
-    char valid_input[] = {'p', 'b', 's'};
+    char valid_input[] = {'l', 'g', 't'};
     if (get_unit_choices(choices, valid_input) == 0) {
         return 0;
     }
@@ -19,28 +19,28 @@ int volume_main(){
         printf("Enter the value you want to convert: ");
         float input = get_value();
   
-        if (choices[0] == 'k') {
-            if (choices[1] == 'b') {
-                print_results(input, kilopascal_to_bar(input), "kilopascal", "bar");
+        if (choices[0] == 'l') {
+            if (choices[1] == 'g') {
+                print_results(input, liter_to_gallon(input), "liter", "gallon");
             }
-            else if (choices[1] == 'p') {
-                print_results(input, kilopascal_to_psi(input), "kilopascal", "psi");
-            }
-        }
-        else if (choices[0] == 'b') {
-            if (choices[1] == 'p') {
-                print_results(input, bar_to_psi(input), "bar", "psi");
-            }
-            else if (choices[1] == 'k') {
-                print_results(input, bar_to_kilopascal(input), "bar", "kilopascal");
+            else if (choices[1] == 't') {
+                print_results(input, liter_to_teaspoon(input), "liter", "teaspoon");
             }
         }
-        else if (choices[0] == 'p') {
-            if (choices[1] == 'k') {
-                print_results(input, psi_to_kilopascal(input), "psi", "kilopascal");
+        else if (choices[0] == 'g') {
+            if (choices[1] == 't') {
+                print_results(input, gallon_to_teaspoon(input), "gallon", "teaspoon");
             }
-            else if (choices[1] == 'b') {
-                print_results(input, psi_to_bar(input), "psi", "bar");
+            else if (choices[1] == 'l') {
+                print_results(input, gallon_to_liter(input), "gallon", "liter");
+            }
+        }
+        else if (choices[0] == 't') {
+            if (choices[1] == 'l') {
+                print_results(input, teaspoon_to_liter(input), "teaspoon", "liter");
+            }
+            else if (choices[1] == 'g') {
+                print_results(input, teaspoon_to_gallon(input), "teaspoon", "gallon");
             }
         }
         // end of monster if clause
@@ -53,30 +53,25 @@ int volume_main(){
        else if (shouldRepeat == 'r') return 0;
     }
     // if 'n' is pressed, exit the loop, call the function again, getting new units
-    pressure_main();
+    volume_main();
     return 0;
 }
 
-float psi_to_kilopascal(float psi){
-    return psi * 0.1450377377;
-    }
-
-float kilopascal_to_psi(float kpa){
-    return kpa * 6.8947572932;
+float liter_to_gallon(float liter){
+    return liter * 0.2641720524;
 }
-
-float bar_to_psi(float bar){
-   return bar * 0.0689475729;
+float liter_to_teaspoon(float liter){
+    return liter * 0.2028841362 * 1000;
 }
-
-float psi_to_bar(float psi){
-   return psi * 14.503773773;
+float gallon_to_teaspoon(float gallon){
+    return gallon * 768;
 }
-
-float kilopascal_to_bar(float kpa){
-   return kpa * 100;
+float gallon_to_liter(float gallon){
+    return gallon * 3.785411784;
 }
-
-float bar_to_kilopascal(float psi){
-   return psi * 0.01;
+float teaspoon_to_liter(float teaspoon){
+    return teaspoon * 0.0049289216;
+}
+float teaspoon_to_gallon(float teaspoon){
+    return teaspoon * 0.0013020833;
 }
