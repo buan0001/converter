@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 void display_intro(){
-    printf("Welcome to this unit converter program\n");
+    printf("\nWelcome to this unit converter program\n");
     printf("--------------------------------------\n");
 }
 

@@ -1,5 +1,5 @@
 
-int volume_main();
+void volume_main(char choices[]);
 void display_volume_menu();
 float liter_to_gallon(float value);
 float liter_to_teaspoon(float value);

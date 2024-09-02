@@ -6,9 +6,10 @@ char get_choice(){
     scanf(" %c", &choice);
     return choice;
 }
-float get_value(){
+float get_value(char unit_to_get[]){
+    printf("\nValue in %s: ", unit_to_get);
     float value;
-    scanf("%f", &value);
+    scanf(" %f", &value);
     return value;
 }
 
@@ -18,12 +19,7 @@ int get_unit_choices(char *choices, char valid_input[]){
     do {
         for (int i = 0; i < 2; i++)
         {
-            if (i == 0) {
-                printf("Choose the unit to convert from: ");
-            }
-            else {
-                printf("Choose the unit to convert to: ");
-            }
+            printf("Choose the unit to convert %s", i == 0 ? "from: " : "to: ");
             int continueCheck = 1;
             while (continueCheck){
                 choices[i] = get_choice();
@@ -42,7 +38,7 @@ int get_unit_choices(char *choices, char valid_input[]){
         }
         if (choices[0] == choices[1]) {
             same_values = 1;
-           printf("You have selected the same unit to convert from and to. Please select different units.\n");
+            printf("You have selected the same unit to convert from and to. Please select different units.\n");
         }
         else {
             same_values = 0;
@@ -64,7 +60,7 @@ void print_results(float org_val, float converted_val, char from[], char to[]) {
     int converted_decimals = count_decimal_places(converted_val);
     char format[50];
     sprintf(format, "\n%%.%df %s is equal to %%.%df %s\n", org_decimals, from, converted_decimals, to);
-    printf("______________________________________\n");
+    printf("\n______________________________________\n");
     printf(format, org_val, converted_val);
     printf("______________________________________\n\n");
 }

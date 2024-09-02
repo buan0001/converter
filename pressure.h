@@ -1,4 +1,4 @@
-int pressure_main();
+void pressure_main(char choices[]);
 void display_pressure_menu();
 float kilopascal_to_psi(float kpa);
 float kilopascal_to_bar(float kpa);

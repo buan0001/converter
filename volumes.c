@@ -5,56 +5,40 @@
 // #include "common.c"
 // #include "common_ui.c"
 
-int volume_main(){
+void volume_main(char choices[]){
+// void volume_main(char choices[], float input){
     // printf("Choose the unit to convert from: ");
-    display_volume_menu();
-    char choices[2];
-    char valid_input[] = {'l', 'g', 't'};
-    if (get_unit_choices(choices, valid_input) == 0) {
-        return 0;
+    float input;
+
+    if (choices[0] == 'l') {
+        input = get_value("liter");
+        if (choices[1] == 'g') {
+            print_results(input, liter_to_gallon(input), "liter", "gallon");
+        }
+        else if (choices[1] == 't') {
+            print_results(input, liter_to_teaspoon(input), "liter", "teaspoon");
+        }
+    }
+    else if (choices[0] == 'g') {
+        input = get_value("gallon");
+        if (choices[1] == 't') {
+            print_results(input, gallon_to_teaspoon(input), "gallon", "teaspoon");
+        }
+        else if (choices[1] == 'l') {
+            print_results(input, gallon_to_liter(input), "gallon", "liter");
+        }
+    }
+    else if (choices[0] == 't') {
+        input = get_value("teaspoon");
+        if (choices[1] == 'l') {
+            print_results(input, teaspoon_to_liter(input), "teaspoon", "liter");
+        }
+        else if (choices[1] == 'g') {
+            print_results(input, teaspoon_to_gallon(input), "teaspoon", "gallon");
+        }
     }
 
-    // Repeat until break or return is hit
-    while (1) {
-        printf("Enter the value you want to convert: ");
-        float input = get_value();
-  
-        if (choices[0] == 'l') {
-            if (choices[1] == 'g') {
-                print_results(input, liter_to_gallon(input), "liter", "gallon");
-            }
-            else if (choices[1] == 't') {
-                print_results(input, liter_to_teaspoon(input), "liter", "teaspoon");
-            }
-        }
-        else if (choices[0] == 'g') {
-            if (choices[1] == 't') {
-                print_results(input, gallon_to_teaspoon(input), "gallon", "teaspoon");
-            }
-            else if (choices[1] == 'l') {
-                print_results(input, gallon_to_liter(input), "gallon", "liter");
-            }
-        }
-        else if (choices[0] == 't') {
-            if (choices[1] == 'l') {
-                print_results(input, teaspoon_to_liter(input), "teaspoon", "liter");
-            }
-            else if (choices[1] == 'g') {
-                print_results(input, teaspoon_to_gallon(input), "teaspoon", "gallon");
-            }
-        }
-        // end of monster if clause
-       ask_repeat();
-       char shouldRepeat = get_choice();
-       if (shouldRepeat == 'n') {
-        break;
-       }
-       // returns to the "main menu"
-       else if (shouldRepeat == 'r') return 0;
-    }
-    // if 'n' is pressed, exit the loop, call the function again, getting new units
-    volume_main();
-    return 0;
+
 }
 
 float liter_to_gallon(float liter){

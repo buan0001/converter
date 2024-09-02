@@ -1,8 +1,8 @@
 #ifndef TEMPERATURE_H
 #define TEMPERATURE_H
 
-void display_temperature_menu();
-int temperature_main();
+
+void temperature_main(char choices[]);
 float fahrenheit_to_celsius(float fahr);
 float fahrenheit_to_kelvin(float fahr);
 float celsius_to_fahrenheit(float celsius);
