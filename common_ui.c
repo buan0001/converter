@@ -19,9 +19,9 @@ int get_unit_choices(char *choices, char valid_input[]){
     do {
         for (int i = 0; i < 2; i++)
         {
-            printf("Choose the unit to convert %s", i == 0 ? "from: " : "to: ");
             int continueCheck = 1;
             while (continueCheck){
+            printf("Choose the unit to convert %s", i == 0 ? "from: " : "to: ");
                 choices[i] = get_choice();
                 continueCheck = validate_input(choices[i], valid_input);
               
@@ -29,7 +29,7 @@ int get_unit_choices(char *choices, char valid_input[]){
                     return 0;
                 }
                 else if (continueCheck == -1) {
-                    printf("Invalid choice. Please try again.\n");
+                    printf("\nInvalid choice. Please try again.\n");
                 }
                 else {
                     continueCheck = 0;

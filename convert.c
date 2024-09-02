@@ -2,9 +2,6 @@
 #include <string.h>
 #include "convert.h"
 #include "common.h"
-// #include "common_ui.c"
-// #include "convert_ui.c"
-// #include "temperature.c"
 
 int main(){
     display_intro();
@@ -54,11 +51,7 @@ int unit_main(char unit_type){
             break;
     }
 
-    // for (int i = 0; i < 3; i++){
-    //     printf("Valid input %d: %c\n", i, valid_input[i]);
-    // }
-    
-    // // (r) has been entered - return to main menu
+    // // (r) has been entered while getting units - return to main menu
     if (get_unit_choices(choices, valid_input) == 0) {
         return 0;
     }
@@ -78,12 +71,12 @@ int unit_main(char unit_type){
        ask_repeat();
        char shouldRepeat = get_choice();
 
-       // get new units of the same type
+       // Get new units of the same type
        if (shouldRepeat == 'n') {
         unit_main(unit_type);
-        break;
+        // break;
        }
-       // returns to the "main menu"
+       // Returns to the "main menu"
        else if (shouldRepeat == 'r') return 0;
     }
     
